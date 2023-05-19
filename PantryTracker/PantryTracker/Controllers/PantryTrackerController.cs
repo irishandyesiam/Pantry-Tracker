@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PantryTracker.Contracts.PantryItem;
 using PantryTracker.Models;
+using PantryTracker.Services.PantryItems;
 
 namespace PantryTracker.Controllers;
 
@@ -8,6 +9,12 @@ namespace PantryTracker.Controllers;
 [Route("items")]
 public class PantryTrackerController : ControllerBase
 {
+    private readonly IPantryItemService _pantryItemService;
+
+    public PantryTrackerController(IPantryItemService pantryItemService)
+    {
+        _pantryItemService = pantryItemService;
+    }
     [HttpPost]
     public IActionResult CreateItem(CreatePantryItemRequest request)
     {
