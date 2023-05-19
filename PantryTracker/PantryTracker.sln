@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantryTracker.Contracts", "PantryTracker.Contracts\PantryTracker.Contracts.csproj", "{08226974-F521-4A7E-9A58-5852FD74698E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantryTracker", "PantryTracker\PantryTracker.csproj", "{713703D3-B2A7-493C-98DE-999D7B4E2B23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08226974-F521-4A7E-9A58-5852FD74698E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08226974-F521-4A7E-9A58-5852FD74698E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08226974-F521-4A7E-9A58-5852FD74698E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08226974-F521-4A7E-9A58-5852FD74698E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{713703D3-B2A7-493C-98DE-999D7B4E2B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{713703D3-B2A7-493C-98DE-999D7B4E2B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{713703D3-B2A7-493C-98DE-999D7B4E2B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{713703D3-B2A7-493C-98DE-999D7B4E2B23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
