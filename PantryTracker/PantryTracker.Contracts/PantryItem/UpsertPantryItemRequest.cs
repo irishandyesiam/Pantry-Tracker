@@ -1,6 +1,6 @@
 namespace PantryTracker.Contracts.PantryItem;
 
-public record CreatePantryItemRequest(
+public record UpsertPantryItemRequest(
     string Name,
     double Quantity,
     string Unit,
