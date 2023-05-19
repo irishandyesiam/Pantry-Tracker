@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PantryTracker.Contracts.PantryItem;
+using PantryTracker.Models;
 
 namespace PantryTracker.Controllers;
 
@@ -7,10 +8,36 @@ namespace PantryTracker.Controllers;
 [Route("items")]
 public class PantryTrackerController : ControllerBase
 {
-    [HttpPost()]
+    [HttpPost]
     public IActionResult CreateItem(CreatePantryItemRequest request)
     {
-        return Ok(request);
+        var item = new PantryItem(
+            Guid.NewGuid(),
+            request.Name,
+            request.Quantity,
+            request.Unit,
+            request.ExpDate,
+            request.Location,
+            request.StartDateTime,
+            request.EndDateTime
+        );
+
+        var response = new PantryItemResponse(
+            item.Id,
+            item.Name,
+            item.Quantity,
+            item.Unit,
+            item.ExpDate,
+            item.Location,
+            item.StartDateTime,
+            item.EndDateTime
+        );
+
+        return CreatedAtAction(
+            actionName: nameof(GetItem),
+            routeValues: new { id=item.Id },
+            value: response
+        );
     }
 
     [HttpGet("{id.guid}")]
