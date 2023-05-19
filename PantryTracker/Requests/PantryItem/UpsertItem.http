@@ -1,0 +1,14 @@
+@id=00000000-0000-0000-000000000000
+
+PUT http://localhost:5077/items/{{id}}
+Content-Type: application/json
+
+{
+    "name": "oatmeal",
+    "quantity": "3",
+    "unit": "cups",
+    "expDate": "2023-06-01",
+    "location": "pantry",
+    "startDateTime": "2023-05-01T08:00:00",
+    "endDateTime": "2023-05-01T11:00:00"
+}
