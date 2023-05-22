@@ -29,6 +29,8 @@ public class PantryTrackerController : ControllerBase
             request.EndDateTime
         );
 
+        _pantryItemService.CreatePantryItem(item);
+
         var response = new PantryItemResponse(
             item.Id,
             item.Name,
@@ -50,7 +52,19 @@ public class PantryTrackerController : ControllerBase
     [HttpGet("{id.guid}")]
     public IActionResult GetItem(Guid id)
     {
-        return Ok(id);
+        PantryItem pantryItem = _pantryItemService.GetItem(id);
+
+        var response = new PantryItemResponse(
+            pantryItem.Id,
+            pantryItem.Name,
+            pantryItem.Quantity,
+            pantryItem.Unit,
+            pantryItem.ExpDate,
+            pantryItem.Location,
+            pantryItem.StartDateTime,
+            pantryItem.EndDateTime
+        );
+        return Ok(response);
     }
 
     [HttpPut("{id.guid}")]
