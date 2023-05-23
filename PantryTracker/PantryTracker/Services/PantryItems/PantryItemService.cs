@@ -7,7 +7,7 @@ public class PantryItemService : IPantryItemService
     private static readonly Dictionary<Guid, PantryItem> _pantryItems = new();
     public void CreatePantryItem(PantryItem pantryItem)
     {
-
+        _pantryItems.Add(pantryItem.Id, pantryItem);
     }
 
     public PantryItem GetItem(Guid id)
