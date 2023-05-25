@@ -10,8 +10,9 @@ public class PantryItem
     public string Location { get; }
     public DateTime StartDateTime { get; }
     public DateTime EndDateTime { get; }
+    public DateTime LastModifiedDateTime { get; }
 
-    public PantryItem(Guid id, string name, double quantity, string unit, DateOnly expDate, string location, DateTime startDateTime, DateTime endDateTime)
+    public PantryItem(Guid id, string name, double quantity, string unit, DateOnly expDate, string location, DateTime startDateTime, DateTime endDateTime, DateTime lastModifiedDateTime)
     {
         //enforce invariants: item names must be lowercase
         Id = id;
@@ -22,5 +23,6 @@ public class PantryItem
         Location = location;
         StartDateTime = startDateTime;
         EndDateTime = endDateTime;
+        LastModifiedDateTime = LastModifiedDateTime;
     }
 }

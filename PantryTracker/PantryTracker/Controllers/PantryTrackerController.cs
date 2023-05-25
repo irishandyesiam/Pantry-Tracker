@@ -27,7 +27,8 @@ public class PantryTrackerController : ControllerBase
             request.ExpDate,
             request.Location,
             request.StartDateTime,
-            request.EndDateTime
+            request.EndDateTime,
+            request.LastModifiedDateTime
         );
 
         _pantryItemService.CreatePantryItem(item);
@@ -40,7 +41,8 @@ public class PantryTrackerController : ControllerBase
             item.ExpDate,
             item.Location,
             item.StartDateTime,
-            item.EndDateTime
+            item.EndDateTime,
+            item.LastModifiedDateTime
         );
 
         return CreatedAtAction(
@@ -49,6 +51,8 @@ public class PantryTrackerController : ControllerBase
             value: response
         );
     }
+
+
 
     [HttpGet("{id.guid}")]
     public IActionResult GetItem(Guid id)
