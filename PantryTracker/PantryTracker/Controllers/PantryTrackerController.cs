@@ -16,6 +16,7 @@ public class PantryTrackerController : ControllerBase
         _pantryItemService = pantryItemService;
     }
     [HttpPost]
+    [ActionName(nameof(CreateItem))]
     public IActionResult CreateItem(CreatePantryItemRequest request)
     {
         var item = new PantryItem(
