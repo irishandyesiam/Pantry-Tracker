@@ -7,4 +7,7 @@ public record UpsertPantryItemRequest(
     DateOnly ExpDate,
     string Location,
     DateTime StartDateTime,
-    DateTime EndDateTime);
+    DateTime EndDateTime)
+{
+    public DateTime LastModifiedDateTime;
+}

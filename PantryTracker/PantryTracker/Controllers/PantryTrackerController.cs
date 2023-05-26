@@ -67,7 +67,8 @@ public class PantryTrackerController : ControllerBase
             pantryItem.ExpDate,
             pantryItem.Location,
             pantryItem.StartDateTime,
-            pantryItem.EndDateTime
+            pantryItem.EndDateTime,
+            pantryItem.LastModifiedDateTime
         );
         return Ok(response);
     }
@@ -75,12 +76,27 @@ public class PantryTrackerController : ControllerBase
     [HttpPut("{id.guid}")]
     public IActionResult UpsertItem(Guid id, UpsertPantryItemRequest request)
     {
-        return Ok(request);
+        var item = new PantryItem(
+            id,
+            request.Name,
+            request.Quantity,
+            request.Unit,
+            request.ExpDate,
+            request.Location,
+            request.StartDateTime,
+            request.EndDateTime,
+            request.LastModifiedDateTime);
+        
+        _pantryItemService.UpsertItem(item);
+
+        //TODO: return 201 if a new breakfast was created
+        return NoContent();
     }
 
     [HttpDelete("{id.guid}")]
     public IActionResult DeleteItem(Guid id)
     {
-        return Ok(id);
+        _pantryItemService.DeleteItem(id);
+        return NoContent();
     }
 }
