@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using PantryTracker.Services.PantryItems;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 {
     app.UseHttpsRedirection();
-    app.MapControllers();
+    app.UseRouting();
+    app.UseEndpoints(endpoints => {
+        endpoints.MapControllers();
+    });
     app.Run();
 }

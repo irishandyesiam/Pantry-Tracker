@@ -54,7 +54,7 @@ public class PantryTrackerController : ControllerBase
 
 
 
-    [HttpGet("{id.guid}")]
+    [HttpGet("{id}")]
     public IActionResult GetItem(Guid id)
     {
         PantryItem pantryItem = _pantryItemService.GetItem(id);
