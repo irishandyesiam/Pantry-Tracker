@@ -1,4 +1,6 @@
+using ErrorOr;
 using PantryTracker.Models;
+using PantryTracker.ServiceErrors;
 
 namespace PantryTracker.Services.PantryItems;
 
@@ -15,9 +17,15 @@ public class PantryItemService : IPantryItemService
         _pantryItems.Remove(id);
     }
 
-    public PantryItem GetItem(Guid id)
+    public ErrorOr<PantryItem> GetItem(Guid id)
     {
-        return _pantryItems[id];
+        if (_pantryItems.TryGetValue(id, out var pantryItem))
+        {
+            return pantryItem;
+        }
+
+        return Errors.PantryItem.NotFound;
+        
     }
 
     public void UpsertItem(PantryItem pantryItem)

@@ -1,7 +1,9 @@
+using ErrorOr;
 using Microsoft.AspNetCore.Mvc;
 using PantryTracker.Contracts.PantryItem;
 using PantryTracker.Models;
 using PantryTracker.Services.PantryItems;
+using PantryTracker.ServiceErrors;
 
 namespace PantryTracker.Controllers;
 
@@ -57,7 +59,15 @@ public class PantryTrackerController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetItem(Guid id)
     {
-        PantryItem pantryItem = _pantryItemService.GetItem(id);
+        ErrorOr<PantryItem> getPantryItemResult = _pantryItemService.GetItem(id);
+
+        if (getPantryItemResult.IsError &&
+            getPantryItemResult.FirstError == Errors.PantryItem.NotFound)
+        {
+            return NotFound();
+        }
+
+        var pantryItem = getPantryItemResult.Value;
 
         var response = new PantryItemResponse(
             pantryItem.Id,
