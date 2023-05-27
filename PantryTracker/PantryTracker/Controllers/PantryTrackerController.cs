@@ -73,7 +73,7 @@ public class PantryTrackerController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPut("{id.guid}")]
+    [HttpPut("{id}")]
     public IActionResult UpsertItem(Guid id, UpsertPantryItemRequest request)
     {
         var item = new PantryItem(
