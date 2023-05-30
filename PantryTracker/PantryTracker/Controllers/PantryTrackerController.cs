@@ -61,15 +61,24 @@ public class PantryTrackerController : ControllerBase
     {
         ErrorOr<PantryItem> getPantryItemResult = _pantryItemService.GetItem(id);
 
-        if (getPantryItemResult.IsError &&
-            getPantryItemResult.FirstError == Errors.PantryItem.NotFound)
-        {
-            return NotFound();
-        }
+        return getPantryItemResult.Match(
+            pantryItem => Ok(MapPantryItemResponse(pantryItem)),
+            errors => Problem());
+        // if (getPantryItemResult.IsError &&
+        //     getPantryItemResult.FirstError == Errors.PantryItem.NotFound)
+        // {
+        //     return NotFound();
+        // }
 
-        var pantryItem = getPantryItemResult.Value;
+        // var pantryItem = getPantryItemResult.Value;
 
-        var response = new PantryItemResponse(
+        // PantryItemResponse response = MapPantryItemResponse(pantryItem);
+        // return Ok(response);
+    }
+
+    private static PantryItemResponse MapPantryItemResponse(PantryItem pantryItem)
+    {
+        return new PantryItemResponse(
             pantryItem.Id,
             pantryItem.Name,
             pantryItem.Quantity,
@@ -80,7 +89,6 @@ public class PantryTrackerController : ControllerBase
             pantryItem.EndDateTime,
             pantryItem.LastModifiedDateTime
         );
-        return Ok(response);
     }
 
     [HttpPut("{id}")]
