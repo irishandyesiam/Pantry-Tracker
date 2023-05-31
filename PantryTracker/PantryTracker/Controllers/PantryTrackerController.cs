@@ -7,9 +7,7 @@ using PantryTracker.ServiceErrors;
 
 namespace PantryTracker.Controllers;
 
-[ApiController]
-[Route("items")]
-public class PantryTrackerController : ControllerBase
+public class PantryTrackerController : ApiController
 {
     private readonly IPantryItemService _pantryItemService;
 
