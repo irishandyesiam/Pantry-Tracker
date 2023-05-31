@@ -31,24 +31,16 @@ public class PantryTrackerController : ApiController
             request.LastModifiedDateTime
         );
 
-        _pantryItemService.CreatePantryItem(item);
+        ErrorOr<Created> createPantryItemResult = _pantryItemService.CreatePantryItem(item);
 
-        var response = new PantryItemResponse(
-            item.Id,
-            item.Name,
-            item.Quantity,
-            item.Unit,
-            item.ExpDate,
-            item.Location,
-            item.StartDateTime,
-            item.EndDateTime,
-            item.LastModifiedDateTime
-        );
-
+        if (createPantryItemResult.IsError)
+        {
+            return Problem(createPantryItemResult.Errors);
+        }
         return CreatedAtAction(
             actionName: nameof(GetItem),
             routeValues: new { id=item.Id },
-            value: response
+            value: MapPantryItemResponse(item)
         );
     }
 
@@ -112,7 +104,11 @@ public class PantryTrackerController : ApiController
     [HttpDelete("{id.guid}")]
     public IActionResult DeleteItem(Guid id)
     {
-        _pantryItemService.DeleteItem(id);
-        return NoContent();
+        ErrorOr<Deleted> deletedResult = _pantryItemService.DeleteItem(id);
+        
+        return deletedResult.Match(
+            deleted => NoContent(),
+            errors => Problem(errors)
+        );
     }
 }
