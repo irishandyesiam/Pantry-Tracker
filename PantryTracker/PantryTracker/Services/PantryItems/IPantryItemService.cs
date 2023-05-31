@@ -5,8 +5,8 @@ namespace PantryTracker.Services.PantryItems;
 
 public interface IPantryItemService
 {
-    void CreatePantryItem(PantryItem pantryItem);
-    void DeleteItem(Guid id);
+    ErrorOr<Created> CreatePantryItem(PantryItem pantryItem);
+    ErrorOr<Deleted> DeleteItem(Guid id);
     ErrorOr<PantryItem> GetItem(Guid id);
-    void UpsertItem(PantryItem item);
+    ErrorOr<Updated> UpsertItem(PantryItem item);
 }

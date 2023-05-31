@@ -61,7 +61,7 @@ public class PantryTrackerController : ApiController
 
         return getPantryItemResult.Match(
             pantryItem => Ok(MapPantryItemResponse(pantryItem)),
-            errors => Problem());
+            errors => Problem(errors));
         // if (getPantryItemResult.IsError &&
         //     getPantryItemResult.FirstError == Errors.PantryItem.NotFound)
         // {
