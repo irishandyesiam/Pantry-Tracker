@@ -33,11 +33,10 @@ public class PantryTrackerController : ApiController
 
         ErrorOr<Created> createPantryItemResult = _pantryItemService.CreatePantryItem(item);
 
-        if (createPantryItemResult.IsError)
-        {
-            return Problem(createPantryItemResult.Errors);
-        }
-        return CreatedAtGetItem(item);
+        return createPantryItemResult.Match(
+            created => CreatedAtGetItem(item),
+            errors => Problem(errors)
+        );
     }
 
     
