@@ -1,7 +1,17 @@
+using PantryTracker.Contracts.PantryItem;
+using PantryTracker.ServiceErrors;
+using ErrorOr;
+
 namespace PantryTracker.Models;
 
 public class PantryItem
 {
+    public const int MinNameLength = 3;
+    public const int MaxNameLength = 50;
+
+    public const int MinDescriptionLength = 50;
+    public const int MaxDescriptionLength = 150;
+
     public Guid Id { get; }
     public string Name { get; }
     public double Quantity { get; }
@@ -12,7 +22,7 @@ public class PantryItem
     public DateTime EndDateTime { get; }
     public DateTime LastModifiedDateTime { get; }
 
-    public PantryItem(Guid id, string name, double quantity, string unit, DateOnly expDate, string location, DateTime startDateTime, DateTime endDateTime, DateTime lastModifiedDateTime)
+    private PantryItem(Guid id, string name, double quantity, string unit, DateOnly expDate, string location, DateTime startDateTime, DateTime endDateTime, DateTime lastModifiedDateTime)
     {
         //enforce invariants: item names must be lowercase
         Id = id;
