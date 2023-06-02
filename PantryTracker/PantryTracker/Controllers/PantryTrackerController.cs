@@ -37,13 +37,11 @@ public class PantryTrackerController : ApiController
         {
             return Problem(createPantryItemResult.Errors);
         }
-        return CreatedAtAction(
-            actionName: nameof(GetItem),
-            routeValues: new { id=item.Id },
-            value: MapPantryItemResponse(item)
-        );
+        return CreatedAtGetItem(item);
     }
 
+    
+  
 
 
     [HttpGet("{id}")]
@@ -95,20 +93,31 @@ public class PantryTrackerController : ApiController
             request.EndDateTime,
             request.LastModifiedDateTime);
         
-        _pantryItemService.UpsertItem(item);
+        ErrorOr<UpsertedPantryItem> upsertedPantryItemResult = _pantryItemService.UpsertItem(item);
 
         //TODO: return 201 if a new breakfast was created
-        return NoContent();
+        return upsertedPantryItemResult.Match(
+            upserted => upserted.IsNewlyCreated ? CreatedAtGetItem(item) : NoContent(),
+            errors => Problem(errors));
     }
 
     [HttpDelete("{id.guid}")]
     public IActionResult DeleteItem(Guid id)
     {
-        ErrorOr<Deleted> deletedResult = _pantryItemService.DeleteItem(id);
+        ErrorOr<Deleted> deletedPantryItemResult = _pantryItemService.DeleteItem(id);
         
-        return deletedResult.Match(
+        return deletedPantryItemResult.Match(
             deleted => NoContent(),
             errors => Problem(errors)
         );
     }
 }
+
+  private CreatedAtActionResult CreatedAtGetItem(PantryItem pantryItem)
+    {
+        return CreatedAtAction(
+                actionName: nameof(GetItem),
+                routeValues: new { id=item.Id },
+                value: MapPantryItemResponse(item)
+            );
+    }

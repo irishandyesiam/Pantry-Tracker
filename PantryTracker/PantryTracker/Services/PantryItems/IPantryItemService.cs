@@ -8,5 +8,5 @@ public interface IPantryItemService
     ErrorOr<Created> CreatePantryItem(PantryItem pantryItem);
     ErrorOr<Deleted> DeleteItem(Guid id);
     ErrorOr<PantryItem> GetItem(Guid id);
-    ErrorOr<Updated> UpsertItem(PantryItem item);
+    ErrorOr<UpsertedPantryItem> UpsertItem(PantryItem item);
 }

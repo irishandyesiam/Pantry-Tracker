@@ -32,10 +32,11 @@ public class PantryItemService : IPantryItemService
         
     }
 
-    public ErrorOr<Updated> UpsertItem(PantryItem pantryItem)
+    public ErrorOr<UpsertedPantryItem> UpsertItem(PantryItem pantryItem)
     {
+        var isNewlyCreated = !_pantryItems.ContainsKey(pantryItem.Id);
         _pantryItems[pantryItem.Id] = pantryItem;
 
-        return Result.Updated;
+        return new UpsertedPantryItem(isNewlyCreated);
     }
 }
