@@ -22,7 +22,7 @@ public class PantryItem
     public DateTime EndDateTime { get; }
     public DateTime LastModifiedDateTime { get; }
 
-    private PantryItem(Guid id, string name, double quantity, string unit, DateOnly expDate, string location, DateTime startDateTime, DateTime endDateTime, DateTime lastModifiedDateTime)
+    public PantryItem(Guid id, string name, double quantity, string unit, DateOnly expDate, string location, DateTime startDateTime, DateTime endDateTime, DateTime lastModifiedDateTime)
     {
         //enforce invariants: item names must be lowercase
         Id = id;
