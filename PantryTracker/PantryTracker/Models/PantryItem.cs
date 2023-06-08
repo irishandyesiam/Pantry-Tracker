@@ -1,5 +1,4 @@
 using PantryTracker.Contracts.PantryItem;
-using PantryTracker.ServiceErrors;
 using ErrorOr;
 
 namespace PantryTracker.Models;
@@ -34,5 +33,10 @@ public class PantryItem
         StartDateTime = startDateTime;
         EndDateTime = endDateTime;
         LastModifiedDateTime = LastModifiedDateTime;
+    }
+
+    public static ErrorOr<PantryItem> From(CreatePantryItemRequest request)
+    {
+        throw new NotImplementedException();
     }
 }
